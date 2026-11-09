@@ -199,4 +199,83 @@ export const testCases: TestCaseDefinition[] = [
       { action: "Refresh the page.", expected: "\"Remove me\" is still not displayed and \"Keep me\" is displayed." },
     ],
   },
+
+  // US-18: Edit Task
+  {
+    storyId: 18,
+    automatedTest: "US-18-edit-task",
+    testFile: "tests/edit-task.spec.ts",
+    title: "Edit the description of an existing task",
+    kind: "positive",
+    description: "Verifies that a task's description can be edited and the new text replaces the old one in the list.",
+    covers: [
+      "A user can edit the description of an existing task.",
+      "The updated description is shown in the task list.",
+    ],
+    preconditions: [seeded('"Buy milk", "Call Alice"')],
+    steps: [
+      { action: "Click \"Edit\" on \"Buy milk\".", expected: "An \"Edit task description\" field appears containing \"Buy milk\"." },
+      { action: "Replace the text with \"Buy oat milk\" and click \"Save\".", expected: "The edit field closes." },
+      {
+        action: "Inspect the task list.",
+        expected: "\"Buy oat milk\" is displayed, \"Buy milk\" is not, \"Call Alice\" is unchanged and the list contains exactly 2 tasks.",
+      },
+    ],
+  },
+  {
+    storyId: 18,
+    automatedTest: "US-18-cancel-edit",
+    testFile: "tests/edit-task.spec.ts",
+    title: "Cancel editing keeps the original description",
+    kind: "negative",
+    description: "Verifies that cancelling an edit discards the typed text and keeps the original description.",
+    covers: ["A user can edit the description of an existing task."],
+    preconditions: [seeded('"Buy milk"')],
+    steps: [
+      { action: "Click \"Edit\" on \"Buy milk\" and replace the text with \"Something else\".", expected: "The edit field contains \"Something else\"." },
+      { action: "Click \"Cancel\".", expected: "The edit field closes and \"Buy milk\" is displayed; \"Something else\" is not." },
+    ],
+  },
+  {
+    storyId: 18,
+    automatedTest: "US-18-reject-empty-edit",
+    testFile: "tests/edit-task.spec.ts",
+    title: "Reject an empty description when editing",
+    kind: "negative",
+    description: "Verifies that saving an empty description is rejected and the original description is kept.",
+    covers: ["Empty descriptions are rejected when editing."],
+    preconditions: [seeded('"Buy milk"')],
+    steps: [
+      { action: "Click \"Edit\" on \"Buy milk\", clear the field and click \"Save\".", expected: "The error \"Task description cannot be empty.\" is shown and the edit field stays open." },
+      { action: "Refresh the page.", expected: "\"Buy milk\" is still displayed and the list contains exactly 1 task." },
+    ],
+  },
+  {
+    storyId: 18,
+    automatedTest: "US-18-reject-whitespace-edit",
+    testFile: "tests/edit-task.spec.ts",
+    title: "Reject a whitespace-only description when editing",
+    kind: "negative",
+    description: "Verifies that a description containing only spaces is treated as empty when editing.",
+    covers: ["Empty descriptions are rejected when editing."],
+    preconditions: [seeded('"Buy milk"')],
+    steps: [
+      { action: "Click \"Edit\" on \"Buy milk\", replace the text with three spaces and click \"Save\".", expected: "An error message is shown and the edit field stays open." },
+      { action: "Refresh the page.", expected: "\"Buy milk\" is still displayed." },
+    ],
+  },
+  {
+    storyId: 18,
+    automatedTest: "US-18-edited-description-persists",
+    testFile: "tests/edit-task.spec.ts",
+    title: "Edited description persists after page refresh",
+    kind: "positive",
+    description: "Verifies that an edited description is stored and restored after reloading.",
+    covers: ["The edited description persists after refreshing the page."],
+    preconditions: [seeded('"Buy milk"')],
+    steps: [
+      { action: "Edit \"Buy milk\" to \"Buy oat milk\" and click \"Save\".", expected: "\"Buy oat milk\" is displayed." },
+      { action: "Refresh the page.", expected: "\"Buy oat milk\" is still displayed and \"Buy milk\" is not." },
+    ],
+  },
 ];

@@ -136,3 +136,61 @@ button {
   color: var(--danger);
   border: 1px solid var(--border);
 }
+
+.task-item__edit,
+.task-item__cancel {
+  padding: 0.35rem 0.7rem;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.task-item__edit-form {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.task-item__edit-form input[type="text"] {
+  flex: 1;
+  min-width: 8rem;
+  padding: 0.35rem 0.6rem;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.task-item__edit-form input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.task-item__save {
+  padding: 0.35rem 0.8rem;
+  border: none;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.task-item__error {
+  flex-basis: 100%;
+  color: var(--danger);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
