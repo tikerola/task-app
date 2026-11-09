@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { expectTaskCount, openWithTasks, taskItem } from "./helpers";
 
-// US-01: Display Tasks
+// US-2: Display Tasks
 
-test("US-01-display-task-list", async ({ page }) => {
+test("US-2-display-task-list", async ({ page }) => {
   await openWithTasks(page, [
     { description: "Write project plan" },
     { description: "Review pull request" },
@@ -13,13 +13,13 @@ test("US-01-display-task-list", async ({ page }) => {
   await expectTaskCount(page, 2);
 });
 
-test("US-01-display-task-description", async ({ page }) => {
+test("US-2-display-task-description", async ({ page }) => {
   await openWithTasks(page, [{ description: "Write project plan" }]);
 
   await expect(taskItem(page, "Write project plan")).toBeVisible();
 });
 
-test("US-01-completed-task-distinguishable", async ({ page }) => {
+test("US-2-completed-task-distinguishable", async ({ page }) => {
   await openWithTasks(page, [
     { description: "Open task" },
     { description: "Done task", completed: true },
@@ -31,7 +31,7 @@ test("US-01-completed-task-distinguishable", async ({ page }) => {
   await expect(taskItem(page, "Open task")).not.toHaveClass(/task-item--completed/);
 });
 
-test("US-01-empty-state", async ({ page }) => {
+test("US-2-empty-state", async ({ page }) => {
   await page.goto("./");
 
   await expect(page.getByText("No tasks yet.")).toBeVisible();

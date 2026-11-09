@@ -1,0 +1,38 @@
+{
+  "organization": "timokerola777",
+  "project": "AI-SDLC-Demo",
+  "epic": {
+    "workItemId": 1,
+    "title": "Task Management Application"
+  },
+  "stories": [
+    {
+      "key": "US-01",
+      "workItemId": 2,
+      "title": "Display Tasks",
+      "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/2",
+      "testFile": "tests/display-tasks.spec.ts"
+    },
+    {
+      "key": "US-02",
+      "workItemId": 3,
+      "title": "Add Task",
+      "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/3",
+      "testFile": "tests/add-task.spec.ts"
+    },
+    {
+      "key": "US-03",
+      "workItemId": 4,
+      "title": "Complete Task",
+      "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/4",
+      "testFile": "tests/complete-task.spec.ts"
+    },
+    {
+      "key": "US-04",
+      "workItemId": 5,
+      "title": "Delete Task",
+      "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/5",
+      "testFile": "tests/delete-task.spec.ts"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { addTask, expectTaskCount, taskItem } from "./helpers";
 
-// US-02: Add Task
+// US-3: Add Task
 
-test("US-02-add-task", async ({ page }) => {
+test("US-3-add-task", async ({ page }) => {
   await page.goto("./");
 
   await addTask(page, "Prepare project documentation");
@@ -12,7 +12,7 @@ test("US-02-add-task", async ({ page }) => {
   await expect(page.getByLabel("Task description")).toHaveValue("");
 });
 
-test("US-02-add-multiple-tasks", async ({ page }) => {
+test("US-3-add-multiple-tasks", async ({ page }) => {
   await page.goto("./");
 
   await addTask(page, "First task");
@@ -21,7 +21,7 @@ test("US-02-add-multiple-tasks", async ({ page }) => {
   await expectTaskCount(page, 2);
 });
 
-test("US-02-reject-empty-task", async ({ page }) => {
+test("US-3-reject-empty-task", async ({ page }) => {
   await page.goto("./");
 
   await page.getByRole("button", { name: "Add" }).click();
@@ -30,7 +30,7 @@ test("US-02-reject-empty-task", async ({ page }) => {
   await expectTaskCount(page, 0);
 });
 
-test("US-02-reject-whitespace-task", async ({ page }) => {
+test("US-3-reject-whitespace-task", async ({ page }) => {
   await page.goto("./");
 
   await addTask(page, "   ");
