@@ -24,12 +24,14 @@ Tests run against `vite preview`, so build before testing.
 
 ## Test traceability
 
-Test titles follow `US-{story-id}-{scenario-name}`. The IDs are placeholders (`US-01`…`US-04`)
-until the User Stories exist in Azure DevOps; they will then be replaced with real work item IDs.
+Test titles follow `US-{story-id}-{scenario-name}`, where `story-id` is the Azure DevOps work item ID
+(project `timokerola777/AI-SDLC-Demo`, Epic #1 *Task Management Application*).
 
-| Story | Test file |
-| ----- | --------- |
-| US-01 Display Tasks | `tests/display-tasks.spec.ts` |
-| US-02 Add Task | `tests/add-task.spec.ts` |
-| US-03 Complete Task | `tests/complete-task.spec.ts` |
-| US-04 Delete Task | `tests/delete-task.spec.ts` |
+| Work item | Story | Test file |
+| --------- | ----- | --------- |
+| #2 | Display Tasks | `tests/display-tasks.spec.ts` |
+| #3 | Add Task | `tests/add-task.spec.ts` |
+| #4 | Complete Task | `tests/complete-task.spec.ts` |
+| #5 | Delete Task | `tests/delete-task.spec.ts` |
+
+The machine-readable mapping is in `ai-agent/traceability.json`.
