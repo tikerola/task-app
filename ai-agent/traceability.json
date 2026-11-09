@@ -11,28 +11,133 @@
       "workItemId": 2,
       "title": "Display Tasks",
       "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/2",
-      "testFile": "tests/display-tasks.spec.ts"
+      "testFile": "tests/display-tasks.spec.ts",
+      "testCases": [
+        {
+          "testCaseId": 6,
+          "title": "Display a list of stored tasks",
+          "automatedTest": "US-2-display-task-list",
+          "testFile": "tests/display-tasks.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/6"
+        },
+        {
+          "testCaseId": 7,
+          "title": "Each task shows its description",
+          "automatedTest": "US-2-display-task-description",
+          "testFile": "tests/display-tasks.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/7"
+        },
+        {
+          "testCaseId": 8,
+          "title": "Completed tasks are visually distinguishable",
+          "automatedTest": "US-2-completed-task-distinguishable",
+          "testFile": "tests/display-tasks.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/8"
+        },
+        {
+          "testCaseId": 9,
+          "title": "Empty task list shows an empty-state message",
+          "automatedTest": "US-2-empty-state",
+          "testFile": "tests/display-tasks.spec.ts",
+          "kind": "negative",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/9"
+        }
+      ]
     },
     {
       "key": "US-02",
       "workItemId": 3,
       "title": "Add Task",
       "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/3",
-      "testFile": "tests/add-task.spec.ts"
+      "testFile": "tests/add-task.spec.ts",
+      "testCases": [
+        {
+          "testCaseId": 10,
+          "title": "Add a task with a valid description",
+          "automatedTest": "US-3-add-task",
+          "testFile": "tests/add-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/10"
+        },
+        {
+          "testCaseId": 11,
+          "title": "Add multiple tasks",
+          "automatedTest": "US-3-add-multiple-tasks",
+          "testFile": "tests/add-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/11"
+        },
+        {
+          "testCaseId": 12,
+          "title": "Reject an empty task description",
+          "automatedTest": "US-3-reject-empty-task",
+          "testFile": "tests/add-task.spec.ts",
+          "kind": "negative",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/12"
+        },
+        {
+          "testCaseId": 13,
+          "title": "Reject a whitespace-only task description",
+          "automatedTest": "US-3-reject-whitespace-task",
+          "testFile": "tests/add-task.spec.ts",
+          "kind": "negative",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/13"
+        }
+      ]
     },
     {
       "key": "US-03",
       "workItemId": 4,
       "title": "Complete Task",
       "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/4",
-      "testFile": "tests/complete-task.spec.ts"
+      "testFile": "tests/complete-task.spec.ts",
+      "testCases": [
+        {
+          "testCaseId": 14,
+          "title": "Mark a task as completed",
+          "automatedTest": "US-4-complete-task",
+          "testFile": "tests/complete-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/14"
+        },
+        {
+          "testCaseId": 15,
+          "title": "Completed state persists after page refresh",
+          "automatedTest": "US-4-completed-state-persists",
+          "testFile": "tests/complete-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/15"
+        }
+      ]
     },
     {
       "key": "US-04",
       "workItemId": 5,
       "title": "Delete Task",
       "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/5",
-      "testFile": "tests/delete-task.spec.ts"
+      "testFile": "tests/delete-task.spec.ts",
+      "testCases": [
+        {
+          "testCaseId": 16,
+          "title": "Delete an existing task",
+          "automatedTest": "US-5-delete-task",
+          "testFile": "tests/delete-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/16"
+        },
+        {
+          "testCaseId": 17,
+          "title": "Deletion persists after page refresh",
+          "automatedTest": "US-5-deletion-persists",
+          "testFile": "tests/delete-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/17"
+        }
+      ]
     }
-  ]
+  ],
+  "association": "Work item links (User Story 'Tested By' Test Case) and automated test name/file in the Test Case description. No formal Azure Test Plans automation association."
 }
