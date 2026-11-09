@@ -1,0 +1,20 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Secrets
+.env
+.env.*
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
