@@ -137,6 +137,55 @@
           "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/17"
         }
       ]
+    },
+    {
+      "key": "US-18",
+      "workItemId": 18,
+      "title": "Edit Task",
+      "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/18",
+      "testFile": "tests/edit-task.spec.ts",
+      "testCases": [
+        {
+          "testCaseId": 19,
+          "title": "Edit the description of an existing task",
+          "automatedTest": "US-18-edit-task",
+          "testFile": "tests/edit-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/19"
+        },
+        {
+          "testCaseId": 20,
+          "title": "Cancel editing keeps the original description",
+          "automatedTest": "US-18-cancel-edit",
+          "testFile": "tests/edit-task.spec.ts",
+          "kind": "negative",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/20"
+        },
+        {
+          "testCaseId": 21,
+          "title": "Reject an empty description when editing",
+          "automatedTest": "US-18-reject-empty-edit",
+          "testFile": "tests/edit-task.spec.ts",
+          "kind": "negative",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/21"
+        },
+        {
+          "testCaseId": 22,
+          "title": "Reject a whitespace-only description when editing",
+          "automatedTest": "US-18-reject-whitespace-edit",
+          "testFile": "tests/edit-task.spec.ts",
+          "kind": "negative",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/22"
+        },
+        {
+          "testCaseId": 23,
+          "title": "Edited description persists after page refresh",
+          "automatedTest": "US-18-edited-description-persists",
+          "testFile": "tests/edit-task.spec.ts",
+          "kind": "positive",
+          "url": "https://dev.azure.com/timokerola777/AI-SDLC-Demo/_workitems/edit/23"
+        }
+      ]
     }
   ],
   "association": "Work item links (User Story 'Tested By' Test Case) and automated test name/file in the Test Case description. No formal Azure Test Plans automation association."

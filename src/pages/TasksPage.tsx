@@ -29,11 +29,15 @@ export function TasksPage() {
     setTasks((prev) => prev.filter((t) => t.id !== id));
   }
 
+  function editTask(id: string, description: string) {
+    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, description } : t)));
+  }
+
   return (
     <main className="tasks-page">
       <h1>Tasks</h1>
       <TaskForm onAdd={addTask} />
-      <TaskList tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />
+      <TaskList tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} onEdit={editTask} />
     </main>
   );
 }

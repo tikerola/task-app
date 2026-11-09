@@ -45,6 +45,7 @@ Test titles follow `US-{story-id}-{scenario-name}`, where `story-id` is the Azur
 | #3 Add Task | #10–#13 | `tests/add-task.spec.ts` |
 | #4 Complete Task | #14–#15 | `tests/complete-task.spec.ts` |
 | #5 Delete Task | #16–#17 | `tests/delete-task.spec.ts` |
+| #18 Edit Task | #19–#23 | `tests/edit-task.spec.ts` |
 
 Each Azure DevOps Test Case is titled `<playwright test title>: <description>` and maps 1:1 to a
 Playwright test. Test Cases are linked to their User Story ("Tested By") and record the automated
