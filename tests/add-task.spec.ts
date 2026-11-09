@@ -26,7 +26,7 @@ test("US-02-reject-empty-task", async ({ page }) => {
 
   await page.getByRole("button", { name: "Add" }).click();
 
-  await expect(page.getByRole("alert")).toHaveText("Task description cannot be empty.");
+  await expect(page.getByRole("alert")).toHaveText("INTENTIONALLY WRONG - CI check");
   await expectTaskCount(page, 0);
 });
 
