@@ -22,6 +22,18 @@ npm test             # run Playwright tests against the built app
 
 Tests run against `vite preview`, so build before testing.
 
+## Developing a new User Story
+
+Create the User Story (with acceptance criteria) in Azure DevOps, then in Claude Code run:
+
+```
+/develop-story <user-story-id>
+```
+
+Claude Code analyzes the story, asks about unclear requirements, creates linked Azure DevOps Test
+Cases and Playwright tests, implements the change on `feature/US-<id>-…` and opens a Pull Request.
+A human reviews and merges; GitHub Actions then deploys. See `ai-agent/README.md`.
+
 ## Test traceability
 
 Test titles follow `US-{story-id}-{scenario-name}`, where `story-id` is the Azure DevOps work item ID

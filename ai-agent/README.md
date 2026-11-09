@@ -11,12 +11,28 @@ no separate agent framework is built here.
 | `test-cases.ts` | Test Case specs (steps, expected results, criteria covered), one per Playwright test. |
 | `sync-test-cases.ts` | Checks criteria coverage, creates missing Test Cases, links them to stories and verifies. |
 | `traceability.json` | Generated mapping: User Story ↔ Test Case ↔ Playwright test. |
+| `fetch-story.ts` | Prints a User Story (description, acceptance criteria, links) for analysis. |
+| `link-pull-request.ts` | Adds a GitHub PR hyperlink and comment to a User Story (verified). |
+
+## User Story Development workflow (Mode B)
+
+Run in Claude Code:
+
+```
+/develop-story <user-story-id>
+```
+
+The workflow is defined in `.claude/skills/develop-story/SKILL.md`: fetch story → analyze and
+clarify → test scenarios → feature branch → Test Case specs → Playwright tests → implement →
+validate → create and link Test Cases → commit → Pull Request → link PR to story → report.
+It never merges; merging and deployment need human approval.
 
 ## Requirements
 
 - Node.js 24+ (runs TypeScript directly).
 - Environment variables `AZURE_DEVOPS_ORG`, `AZURE_DEVOPS_PROJECT`, `AZURE_DEVOPS_PAT`.
-  Never commit the PAT.
+  On Windows, user-level variables are read from the registry if the current shell does not
+  have them yet. Never commit the PAT.
 
 ## Usage
 

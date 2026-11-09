@@ -14,14 +14,28 @@ export interface WorkItem {
 
 type PatchOp = { op: "add" | "replace" | "remove" | "test"; path: string; value?: unknown };
 
+import { execFileSync } from "node:child_process";
+
+/** On Windows, falls back to the user-level variable when the shell was started before it was set. */
+function readEnv(name: string): string | undefined {
+  if (process.env[name]) return process.env[name];
+  if (process.platform !== "win32") return undefined;
+  try {
+    const out = execFileSync("reg", ["query", "HKCU\\Environment", "/v", name], { encoding: "utf8", stdio: "pipe" });
+    return out.match(new RegExp(`${name}\\s+REG_\\w+\\s+(.+)`))?.[1]?.trim() || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function requireEnv(name: string): string {
-  const value = process.env[name];
+  const value = readEnv(name);
   if (!value) throw new Error(`Missing environment variable ${name}`);
   return value;
 }
 
 export const org = requireEnv("AZURE_DEVOPS_ORG");
-export const project = process.env.AZURE_DEVOPS_PROJECT ?? "AI-SDLC-Demo";
+export const project = readEnv("AZURE_DEVOPS_PROJECT") ?? "AI-SDLC-Demo";
 const baseUrl = `https://dev.azure.com/${encodeURIComponent(org)}`;
 const projectUrl = `${baseUrl}/${encodeURIComponent(project)}`;
 const authHeader = "Basic " + Buffer.from(":" + requireEnv("AZURE_DEVOPS_PAT")).toString("base64");
@@ -98,6 +112,31 @@ export function parentIdOf(item: WorkItem): number | undefined {
 
 export async function setParent(childId: number, parentId: number): Promise<WorkItem> {
   return updateWorkItem(childId, [parentLinkOp(parentId)]);
+}
+
+export function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
+    .trim();
+}
+
+/**
+ * Extracts acceptance criteria as a list of plain-text lines. Handles bullet lists and the
+ * <div>/<br>/<p> line formats the Azure DevOps editor produces when criteria are typed by hand.
+ */
+export function acceptanceCriteriaOf(item: WorkItem): string[] {
+  const html = String(item.fields["Microsoft.VSTS.Common.AcceptanceCriteria"] ?? "");
+  return html
+    .replace(/<br\s*\/?>|<\/(li|div|p|h\d)>/gi, "\n")
+    .split("\n")
+    .map((line) => stripHtml(line).replace(/^\s*(?:[-*•]|\d+[.)])\s*/, "").trim())
+    .filter(Boolean);
 }
 
 export function toHtmlList(items: string[]): string {

@@ -16,6 +16,7 @@
 
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import {
+  acceptanceCriteriaOf,
   createWorkItem,
   findByTitle,
   getWorkItem,
@@ -35,23 +36,6 @@ const traceabilityPath = new URL("./traceability.json", import.meta.url);
 
 const escapeHtml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-
-function stripHtml(html: string): string {
-  return html
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&quot;/g, '"')
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&")
-    .trim();
-}
-
-function acceptanceCriteriaOf(story: WorkItem): string[] {
-  const html = String(story.fields["Microsoft.VSTS.Common.AcceptanceCriteria"] ?? "");
-  const items = [...html.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)].map((m) => stripHtml(m[1]));
-  return items.length ? items : html.split(/<br\s*\/?>|\n/).map(stripHtml).filter(Boolean);
-}
 
 function caseTitle(tc: TestCaseDefinition): string {
   return `${tc.automatedTest}: ${tc.title}`;
@@ -210,8 +194,20 @@ async function main() {
   }
   console.log(failures ? `  ${failures} Test Case(s) failed verification.` : `  All ${results.length} Test Cases verified.`);
 
-  // Update traceability mapping.
+  // Update traceability mapping (adding stories that are not yet listed).
   const trace = JSON.parse(readFileSync(traceabilityPath, "utf8"));
+  for (const id of storyIds) {
+    if (trace.stories.some((s: { workItemId: number }) => s.workItemId === id)) continue;
+    const story = await getWorkItem(id);
+    const files = [...new Set(testCases.filter((t) => t.storyId === id).map((t) => t.testFile))];
+    trace.stories.push({
+      key: `US-${id}`,
+      workItemId: id,
+      title: story.fields["System.Title"],
+      url: workItemWebUrl(id),
+      testFile: files.length === 1 ? files[0] : files,
+    });
+  }
   for (const story of trace.stories) {
     story.testCases = results
       .filter((r) => r.tc.storyId === story.workItemId)
